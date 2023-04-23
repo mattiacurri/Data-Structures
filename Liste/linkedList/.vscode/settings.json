@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "memory_resource": "cpp",
-        "istream": "cpp",
-        "new": "cpp",
-        "streambuf": "cpp",
-        "utility": "cpp"
-    }
-}
