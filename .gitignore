@@ -32,3 +32,5 @@
 *.app
 desktop.ini
 cmake-build-debug
+.idea
+.vscode
