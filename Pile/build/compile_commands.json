@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/acurr/Desktop/Universita/II Anno - I Semestre/ASD/Strutture Dati/Mie Realizzazioni/Pile/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/Pile.dir/includes_CXX.rsp -g -std=gnu++14 -o CMakeFiles\\Pile.dir\\tester.cpp.obj -c \"C:\\Users\\acurr\\Desktop\\Universita\\II Anno - I Semestre\\ASD\\Strutture Dati\\Mie Realizzazioni\\Pile\\tester.cpp\"",
+  "file": "C:/Users/acurr/Desktop/Universita/II Anno - I Semestre/ASD/Strutture Dati/Mie Realizzazioni/Pile/tester.cpp"
+}
+]

@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "exception": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp",
+        "functional": "cpp",
+        "typeinfo": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "array": "cpp",
+        "string_view": "cpp"
+    }
+}
