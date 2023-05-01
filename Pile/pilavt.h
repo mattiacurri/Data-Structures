@@ -7,20 +7,20 @@
 #include "pila.h"
 #include "exceptions.h"
 
-template <class T>
-class Stack_vt
-{
+template<class T>
+class Stack_vt {
 public:
     // rinomino i tipi
     typedef T valuetype;
 
     // costruttori
     Stack_vt();
+
     Stack_vt(int);
-    
+
     // costruttore di copia
     Stack_vt(const Stack_vt<T> &src);
-    
+
     // distruttore
     ~Stack_vt();
 
@@ -48,6 +48,7 @@ public:
 
     // data una pila di interi, eliminare tutti gli elementi maggiori di k
     Stack_vt<int> eraseK(Stack_vt<int> &, int);
+
 private:
     valuetype *elems;
     int maxLength;
@@ -55,27 +56,24 @@ private:
 };
 
 // Costruttore di default
-template <class T>
-Stack_vt<T>::Stack_vt()
-{
+template<class T>
+Stack_vt<T>::Stack_vt() {
     elems = new valuetype[DEFAULT_SIZE];
     maxLength = DEFAULT_SIZE;
     head = 0;
 }
 
 // Costruttore con dimensione da parametro
-template <class T>
-Stack_vt<T>::Stack_vt(int N)
-{
+template<class T>
+Stack_vt<T>::Stack_vt(int N) {
     elems = new valuetype[N];
     maxLength = N;
     head = 0;
 }
 
 // Costruttore di copia
-template <class T>
-Stack_vt<T>::Stack_vt(const Stack_vt<T> &src)
-{
+template<class T>
+Stack_vt<T>::Stack_vt(const Stack_vt<T> &src) {
     this->maxLength = src.maxLength;
     this->head = src.head;
 
@@ -89,57 +87,47 @@ Stack_vt<T>::Stack_vt(const Stack_vt<T> &src)
 }
 
 // Distruttore
-template <class T>
-Stack_vt<T>::~Stack_vt()
-{
+template<class T>
+Stack_vt<T>::~Stack_vt() {
     delete[] elems;
 };
 
 // metodo che verifica se una pila e' vuota
-template <class T>
-bool Stack_vt<T>::empty() const
-{
+template<class T>
+bool Stack_vt<T>::empty() const {
     return head == 0;
 }
 
 // metodo che restituisce l'elemento al top
-template <class T>
-T Stack_vt<T>::peek() const
-{
+template<class T>
+T Stack_vt<T>::peek() const {
     if (this->empty()) {
         throw EmptyStackException();
-    } 
+    }
     return this->elems[head - 1];
 }
 
 // metodo che elimina l'elemento al top restituendolo
-template <class T>
-T Stack_vt<T>::pop()
-{
+template<class T>
+T Stack_vt<T>::pop() {
     T tmp;
-    if (!empty())
-    {
+    if (!empty()) {
         tmp = this->peek();
         head -= 1;
-    }
-    else
-    {
+    } else {
         throw EmptyStackException();
     }
     return tmp;
 }
 
 // metodo che inserisce un elemento in cima allo stack
-template <class T>
-void Stack_vt<T>::push(const valuetype& el)
-{
+template<class T>
+void Stack_vt<T>::push(const valuetype &el) {
     try {
-        if (head != maxLength)
-        {
+        if (head != maxLength) {
             elems[head] = el;
             head++;
-        }
-        else {
+        } else {
             throw IndexOutOfBoundException(maxLength + 1, this->maxLength, __LINE__, __FILE__);
         }
     }
@@ -150,15 +138,12 @@ void Stack_vt<T>::push(const valuetype& el)
 }
 
 // sovraccarico dell'operatore <<
-template <class K>
-std::ostream &operator<<(std::ostream &os, const Stack_vt<K> &s)
-{
+template<class K>
+std::ostream &operator<<(std::ostream &os, const Stack_vt<K> &s) {
     os << "BOT[";
-    if (!s.empty())
-    {
+    if (!s.empty()) {
         int i = 0;
-        while (i < s.head - 1)
-        {
+        while (i < s.head - 1) {
             os << s.elems[i] << "|";
             i++;
         }
@@ -170,20 +155,16 @@ std::ostream &operator<<(std::ostream &os, const Stack_vt<K> &s)
 }
 
 // sovraccarico dell'operatore =
-template <class T>
-Stack_vt<T> &Stack_vt<T>::operator=(const Stack_vt<T> &src)
-{
+template<class T>
+Stack_vt<T> &Stack_vt<T>::operator=(const Stack_vt<T> &src) {
     // elimino il vecchio vettore di elems dello stack
     delete[] elems;
 
     // verifico che lo stack copiato e' vuoto
-    if (src.empty())
-    {
+    if (src.empty()) {
         head = 0;
         maxLength = 0;
-    }
-    else
-    {
+    } else {
         // assegno i valori di head e maxLength del vettore elems dello stack copiato
         head = src.head;
         maxLength = src.maxLength;
@@ -192,8 +173,7 @@ Stack_vt<T> &Stack_vt<T>::operator=(const Stack_vt<T> &src)
         elems = new T[maxLength];
 
         // copio gli elems nello Stack
-        for (int i = head; i >= 0; i--)
-        {
+        for (int i = head; i >= 0; i--) {
             elems[i] = src.elems[i];
         }
     }
@@ -201,12 +181,11 @@ Stack_vt<T> &Stack_vt<T>::operator=(const Stack_vt<T> &src)
 }
 
 // sovraccarico dell'operatore ==
-template <class T>
+template<class T>
 bool Stack_vt<T>::operator==(const Stack_vt<T> &src) {
     if (this->head != src.head) {
         return false;
-    }
-    else {
+    } else {
         for (int i = 0; i < this->head; i++) {
             if (this->elems[i] != src.elems[i]) {
                 return false;
@@ -239,7 +218,7 @@ Stack_vt<int> Stack_vt<int>::eraseK(Stack_vt<int> &S, int k) {
             S.pop();
         }
     }
-    while(!temp.empty()) {
+    while (!temp.empty()) {
         S.push(temp.peek());
         temp.pop();
     }

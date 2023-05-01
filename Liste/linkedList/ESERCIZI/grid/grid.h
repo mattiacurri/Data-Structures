@@ -168,7 +168,6 @@ void grid::moveDown(int x, int y) {
 }
 
 
-
 bool grid::surrounded(int x, int y) {
     int neighbour_counter = 0;
     LinkedList<cell>::position p = cells.begin();

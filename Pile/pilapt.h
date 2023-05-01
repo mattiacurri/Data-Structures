@@ -67,7 +67,6 @@ public:
     Stack_pt<T> reverse(Stack_pt<T> &S);
 
 
-
 private:
     StackNode<T> *head;
 };
@@ -302,8 +301,6 @@ Stack_pt<T> Stack_pt<T>::reverse(Stack_pt<T> &S) {
     S = temp;
     return S;
 }
-
-
 
 
 #endif // PILAPT_H

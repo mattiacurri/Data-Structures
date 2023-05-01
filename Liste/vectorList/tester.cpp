@@ -1,9 +1,9 @@
 #include "vectorList.h"
 #include <iostream>
+
 using namespace std;
 
-int main()
-{
+int main() {
     VectorList<int> list1, list2;
     VectorList<int>::position iter;
 

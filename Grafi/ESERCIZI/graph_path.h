@@ -15,18 +15,22 @@ public:
 // 1) parte dal nodo a e termina sul nodo b
 // 2) la somma delle etichette dei nodi nella sequenza dei nodi del cammino `e minore
 // dell’intero sum dato in input
-    bool sumPath(grafoMat<int, int>&, int sum, typename grafoMat<int, int>::nodo a, typename grafoMat<int, int>::nodo b);
+    bool
+    sumPath(grafoMat<int, int> &, int sum, typename grafoMat<int, int>::nodo a, typename grafoMat<int, int>::nodo b);
 
 private:
     // grafoMat<int, int> G;
 
-    bool bfs_sumPath(grafoMat<int, int>&, int sum, typename grafoMat<int, int>::nodo a, typename grafoMat<int, int>::nodo b, bool &exists);
+    bool
+    bfs_sumPath(grafoMat<int, int> &, int sum, typename grafoMat<int, int>::nodo a, typename grafoMat<int, int>::nodo b,
+                bool &exists);
 
     int nPos(typename grafoMat<int, int>::nodo n, nVisit visited[]);
 
 };
 
-bool graph_path::sumPath(grafoMat<int, int>& G, int sum, typename grafoMat<int, int>::nodo a, typename grafoMat<int, int>::nodo b) {
+bool graph_path::sumPath(grafoMat<int, int> &G, int sum, typename grafoMat<int, int>::nodo a,
+                         typename grafoMat<int, int>::nodo b) {
     if (!G.empty()) {
         bool exists = false;
         return bfs_sumPath(G, sum, a, b, exists);
@@ -35,7 +39,8 @@ bool graph_path::sumPath(grafoMat<int, int>& G, int sum, typename grafoMat<int, 
     }
 }
 
-bool graph_path::bfs_sumPath(grafoMat<int, int>& G,int sum, typename grafoMat<int, int>::nodo a, typename grafoMat<int, int>::nodo b,
+bool graph_path::bfs_sumPath(grafoMat<int, int> &G, int sum, typename grafoMat<int, int>::nodo a,
+                             typename grafoMat<int, int>::nodo b,
                              bool &exists) {
     int sum_path = 0;
     nVisit n;

@@ -24,8 +24,8 @@ public:
     void visualizza_dispari();
 
 private:
-    LinkedList<string> pari;
-    LinkedList<string> dispari;
+    LinkedList <string> pari;
+    LinkedList <string> dispari;
 };
 
 void eo_strings::inserisci(string s) {

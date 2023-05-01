@@ -58,20 +58,20 @@ void CodaP<T>::creaPrioriCoda() {
 
 template<class T>
 void CodaP<T>::inserisci(_tipoelem e) {
-    assert (ultimo < MAXLUNG);
+    assert(ultimo < MAXLUNG);
     heap[++ultimo - 1] = e;
     fixUp();
 };
 
 template<class T>
 typename CodaP<T>::_tipoelem CodaP<T>::min() {
-    assert (ultimo != 0);
+    assert(ultimo != 0);
     return (heap[0]);
 };
 
 template<class T>
 void CodaP<T>::cancellaMin() {
-    assert (ultimo != 0);
+    assert(ultimo != 0);
 
     heap[0] = heap[ultimo - 1];
 

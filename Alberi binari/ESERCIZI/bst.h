@@ -7,54 +7,62 @@
 
 using namespace std;
 
-class BST
-{
+class BST {
 public:
     bool is_bst();
+
     void insert(int);
+
     bool search(int);
+
     int max();
+
     int min();
+
     void print();
+
     void erase(int k);
+
     BinTree_pt<int>::node successor(Bintree_pt<int>::node);
+
     BinTree_pt<int>::node predecessor(Bintree_pt<int>::node);
 
 private:
     Bintree_pt<int> T;
+
     bool search(int, Bintree_pt<int>::node);
+
     void print(Bintree_pt<int>::node);
+
     void isBST(Bintree_pt<int>::node, bool &);
+
     int max(Bintree_pt<int>::node n);
+
     int min(Bintree_pt<int>::node n);
+
     void eraseNode(Bintree_pt<int>::node n, int k);
 };
 
 // La funzione erase, se exists, il node indentificato dalla chiave k
-void BST::erase(int k)
-{
-    if (!T.alberoBinVuoto() && search(k))
-    {
+void BST::erase(int k) {
+    if (!T.alberoBinVuoto() && search(k)) {
         eraseNode(T.root(), k);
     }
 }
 
 // Cancellazione di un nodo da un BST e modifica della struttura per conservare le proprietà di un BST
-void BST::eraseNode(Bintree_pt<int>::node n, int k)
-{
+void BST::eraseNode(Bintree_pt<int>::node n, int k) {
     if (k < T.read(n) && !T.leftEmpty(n))
         eraseNode(T.leftNode(n), k);
     if (k > T.read(n) && !T.rightEmpty(n))
         eraseNode(T.rightNode(n), k);
-    // CHIAVE TROVATA
-    else
-    {
+        // CHIAVE TROVATA
+    else {
         // CASO 1 -> FOGLIA
         if (T.rightEmpty(n) && T.leftEmpty(n))
             T.deleteBinTree(n);
-        // CASO 2 -> IL NODO HA DUE FIGLI
-        else if (!T.leftEmpty(n) && !T.rightEmpty(n))
-        {
+            // CASO 2 -> IL NODO HA DUE FIGLI
+        else if (!T.leftEmpty(n) && !T.rightEmpty(n)) {
             // TROVA IL SUCCESSORE DA SOSTITUIRE
             Bintree_pt<int>::node succ = successor(n);
             // Copio il valore del successore nel nodo corrente
@@ -62,9 +70,8 @@ void BST::eraseNode(Bintree_pt<int>::node n, int k)
             // Cancello ricorsivamente il successivo
             eraseNode(T.leftNode(n), T.read(succ));
         }
-        // CASO 3 -> IL NODO HA SOLO UN FIGLIO
-        else
-        {
+            // CASO 3 -> IL NODO HA SOLO UN FIGLIO
+        else {
             Bintree_pt<int>::node child;
             if (T.rightEmpty(n))
                 child = T.leftNode(n);
@@ -78,19 +85,16 @@ void BST::eraseNode(Bintree_pt<int>::node n, int k)
 }
 
 // La funzione ritorna TRUE se il node identificato dalla chiave K esiste, false ALTRIMENTI
-bool BST::search(int k)
-{
+bool BST::search(int k) {
     bool exists = false;
-    if (!T.alberoBinVuoto())
-    {
+    if (!T.alberoBinVuoto()) {
         exists = search(k, T.root());
     }
     return exists;
 }
 
 // funzione di ricerca di un nodo
-bool BST::search(int k, Bintree_pt<int>::node n)
-{
+bool BST::search(int k, Bintree_pt<int>::node n) {
     // se ho trovato il nodo restituisco true
     if (T.read(n) == k)
         return true;
@@ -105,23 +109,17 @@ bool BST::search(int k, Bintree_pt<int>::node n)
 }
 
 // Inserimento in un BST, rispettando le proprietà
-void BST::insert(int k)
-{
+void BST::insert(int k) {
     // la chiave non deve esistere all'interno del BST
-    if (!search(k))
-    {
-        if (T.alberoBinVuoto())
-        {
+    if (!search(k)) {
+        if (T.alberoBinVuoto()) {
             // CASO SEMPLICE: ALBERO VUOTO -> INSERISCO L'ELEMENTO COME RADICE
             T.insertRoot(k);
-        }
-        else
-        {
+        } else {
             Bintree_pt<int>::node n = T.root();
             bool continua = true;
             // VADO ALLA RICERCA DELLA POSIZIONE IN CUI INSERIRE LA CHIAVE K, tenendo conto delle proprietà di un BST
-            while (continua)
-            {
+            while (continua) {
                 if (k < T.read(n) && !T.leftEmpty(n))
                     n = T.leftNode(n);
                 else if (k > T.read(n) && !T.rightEmpty(n))
@@ -130,12 +128,9 @@ void BST::insert(int k)
                     continua = false;
             }
             // INSERISCO il VALORE NELLA POSIZIONE CORRETTA
-            if (k < T.read(n))
-            {
+            if (k < T.read(n)) {
                 T.leftInsert(n, k);
-            }
-            else
-            {
+            } else {
                 T.rightInsert(n, k);
             }
         }
@@ -143,19 +138,15 @@ void BST::insert(int k)
 }
 
 // Funzione che restituisce il valore massimo di un bst
-int BST::max()
-{
-    if (!T.alberoBinVuoto())
-    {
+int BST::max() {
+    if (!T.alberoBinVuoto()) {
         return max(T.root());
-    }
-    else
+    } else
         throw out_of_range("ALBERO VUOTO");
 }
 
 // Funzione che restituisce il valore massimo di un BST che ha come radice il nodo n. Il valore massimo è la foglia piu' a destra dell'albero
-int BST::max(Bintree_pt<int>::node n)
-{
+int BST::max(Bintree_pt<int>::node n) {
     if (T.rightEmpty(n))
         return T.read(n);
     else
@@ -163,19 +154,15 @@ int BST::max(Bintree_pt<int>::node n)
 }
 
 // Funzione che restituisce il valore minimo di un bst
-int BST::min()
-{
-    if (!T.alberoBinVuoto())
-    {
+int BST::min() {
+    if (!T.alberoBinVuoto()) {
         return min(T.root());
-    }
-    else
+    } else
         throw out_of_range("ALBERO VUOTO");
 }
 
 // Funzione che restituisce il valore massimo di un BST che ha come radice il nodo n. Il valore minimo è la foglia piu' a sinistra dell'albero
-int BST::min(Bintree_pt<int>::node n)
-{
+int BST::min(Bintree_pt<int>::node n) {
     if (T.leftEmpty(n))
         return T.read(n);
     else
@@ -183,10 +170,8 @@ int BST::min(Bintree_pt<int>::node n)
 }
 
 // Funzione che restituisce true se l'albero è un BST, false altrimenti
-bool BST::is_bst()
-{
-    if (!T.alberoBinVuoto())
-    {
+bool BST::is_bst() {
+    if (!T.alberoBinVuoto()) {
         bool isBst = true;
         isBST(T.root(), isBst);
         return isBst;
@@ -195,10 +180,8 @@ bool BST::is_bst()
 }
 
 // Funzione che verifica se un albero è un BST
-void BST::isBST(Bintree_pt<int>::node n, bool &isBst)
-{
-    if (isBst)
-    {
+void BST::isBST(Bintree_pt<int>::node n, bool &isBst) {
+    if (isBst) {
         // calcolo MAX e MIN dell'albero avente come radice n
         int min_value = min(n);
         int max_value = max(n);
@@ -213,8 +196,7 @@ void BST::isBST(Bintree_pt<int>::node n, bool &isBst)
             if (search(T.read(n), T.rightNode(n)))
                 isBst = false;
         // se l'albero risulta essere ancora un BST, richiamo la funzione di verifica sui figli di n (se esistono)
-        if (isBst)
-        {
+        if (isBst) {
             if (!T.leftEmpty(n))
                 isBST(T.leftNode(n), isBst);
             if (!T.rightEmpty(n))
@@ -224,19 +206,16 @@ void BST::isBST(Bintree_pt<int>::node n, bool &isBst)
 }
 
 // print di un BST
-void BST::print()
-{
+void BST::print() {
     cout << "[ ";
-    if (!T.alberoBinVuoto())
-    {
+    if (!T.alberoBinVuoto()) {
         print(T.root());
     }
     cout << "]" << endl;
 }
 
 // Visita simmetrica
-void BST::print(Bintree_pt<int>::node n)
-{
+void BST::print(Bintree_pt<int>::node n) {
     if (!T.leftEmpty(n))
         print(T.leftNode(n));
     cout << T.read(n) << " ";
@@ -245,26 +224,20 @@ void BST::print(Bintree_pt<int>::node n)
 }
 
 // Funzione che restituisce il node successore del node n
-Bintree_pt<int>::node BST::successor(Bintree_pt<int>::node n)
-{
+Bintree_pt<int>::node BST::successor(Bintree_pt<int>::node n) {
     // Se il node ha un figlio destro, il successore è il node più a sinistra del sottoalbero destro di n
-    if (!T.rightEmpty(n))
-    {
+    if (!T.rightEmpty(n)) {
         n = T.rightNode(n);
-        while (!T.leftEmpty(n))
-        {
+        while (!T.leftEmpty(n)) {
             n = T.leftNode(n);
         }
         return n;
-    }
-    else
-    {
+    } else {
         // Altrimenti, il successore è il piu piccolo antenato di n il cui child sinistro è antenato di n
         Bintree_pt<int>::node p;
         if (n != T.root())
             p = T.genitore(n);
-        while (p != T.root() && n == T.rightNode(n))
-        {
+        while (p != T.root() && n == T.rightNode(n)) {
             n = p;
             p = T.genitore(p);
         }
@@ -275,26 +248,20 @@ Bintree_pt<int>::node BST::successor(Bintree_pt<int>::node n)
 }
 
 // Funzione che restituisce il node predecessor del node n
-Bintree_pt<int>::node BST::predecessor(Bintree_pt<int>::node n)
-{
+Bintree_pt<int>::node BST::predecessor(Bintree_pt<int>::node n) {
     // Se n ha un child sinistro, il predecessor di n è il node più a destra dell sottoalbero sinistro di n
-    if (!T.leftEmpty(n))
-    {
+    if (!T.leftEmpty(n)) {
         n = T.leftNode(n);
-        while (!T.rightEmpty(n))
-        {
+        while (!T.rightEmpty(n)) {
             n = T.rightNode(n);
         }
         return n;
-    }
-    else
-    {
+    } else {
         // Altrimenti, il prececessore è il piu grande antenato di n il cui figlio destro è antenato di n
         Bintree_pt<int>::node p;
         if (n != T.root())
             p = T.genitore(n);
-        while (p != T.root() && T.leftNode(n) == n)
-        {
+        while (p != T.root() && T.leftNode(n) == n) {
             n = p;
             p = T.genitore(p);
         }

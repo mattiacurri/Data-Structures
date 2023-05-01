@@ -4,15 +4,15 @@
 #include <algorithm>
 #include "ESERCIZI/esercizivari.h"
 
-int main(){
-	Tree_ptr<char> tree;
+int main() {
+    Tree_ptr<char> tree;
 
-	Tree_ptr<char>::node n;
+    Tree_ptr<char>::node n;
     tree.insertRoot('a');
 
-	n = tree.root();
+    n = tree.root();
     tree.insertFirst(n, 'b');
-	n = tree.firstChild(n);
+    n = tree.firstChild(n);
     tree.insertFirst(n, 'c');
     tree.insertFirst(n, 'c');
 
@@ -29,14 +29,14 @@ int main(){
     tree.insertFirst(n, 'd');
     tree.insertFirst(n, 'd');
 
-	tree.print();
+    tree.print();
 
     tree.dfs(tree.root());
     //n = tree.brother(tree.firstChild(tree.root()));
-	//tree.removeSubTree(n);
+    //tree.removeSubTree(n);
 
 
-	tree.print();
+    tree.print();
 
     Tree_ptr<int> intalbero;
     Tree_ptr<int>::node pos;
@@ -111,5 +111,5 @@ int main(){
     cout << tree.breadth(tree) << endl;
     tree.invisita(tree.root());
 
-	return 0;
+    return 0;
 }

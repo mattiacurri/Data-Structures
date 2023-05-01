@@ -1,9 +1,9 @@
 #include "linkedList.h"
 #include <iostream>
+
 using namespace std;
 
-int main()
-{
+int main() {
     LinkedList<int> list1, list2;
     LinkedList<int>::position iter;
 

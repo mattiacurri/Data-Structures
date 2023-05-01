@@ -53,6 +53,7 @@ public:
     // funzioni accessorie
     // metodo per ottenere la lunghezza della coda
     int getLength() const;
+
     // metodo che verifica dato un valore se questo e' presente nella coda
     bool exists(const value_type &);
 

@@ -1,9 +1,8 @@
 #ifndef TREE_H
 #define TREE_H
 
-template <class T, class N>
-class Tree
-{
+template<class T, class N>
+class Tree {
 public:
     typedef T value_type;
     typedef N node;
@@ -47,7 +46,6 @@ public:
     // Metodo che restituisce il valore di un nodo
     virtual value_type read(node) const = 0;
 };
-
 
 
 #endif

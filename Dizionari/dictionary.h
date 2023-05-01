@@ -34,6 +34,7 @@ struct mypair {
     K getKey() const {
         return first;
     }
+
     E getValue() const {
         return second;
     }

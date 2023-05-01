@@ -2,9 +2,8 @@
 #define Stack_H
 
 // definisco la classe template Stack
-template <class T>
-class Stack
-{
+template<class T>
+class Stack {
 public:
     typedef T valuetype; // tipo di dato dello stack
 

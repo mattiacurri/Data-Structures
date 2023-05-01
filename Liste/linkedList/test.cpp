@@ -5,6 +5,7 @@
 #include "linkedList.h"
 
 void generaValori(LinkedList<int> &l);
+
 void testCase(LinkedList<int> l);
 
 int main() {
@@ -28,7 +29,6 @@ void generaValori(LinkedList<int> &l) {
         int x = rand() % 10 + 1;
         l.headInsert(x);
     }
-
 
 
 }

@@ -2,9 +2,8 @@
 #define _CODA_H
 
 // creo la classe template virtuale coda
-template <class T>
-class Queue
-{
+template<class T>
+class Queue {
 public:
     typedef T value_type;
 
@@ -18,7 +17,7 @@ public:
     virtual void pop() = 0;
 
     // metodo per inserire un elemento in coda
-    virtual void push(const value_type&) = 0;
+    virtual void push(const value_type &) = 0;
 
 };
 

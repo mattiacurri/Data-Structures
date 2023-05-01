@@ -5,7 +5,7 @@
 
 struct PositionOutOfRange : public std::out_of_range {
     PositionOutOfRange() : out_of_range(
-        "Posizione non valida.") {};
+            "Posizione non valida.") {};
 };
 
 /*struct FullSize : public std::invalid_argument {

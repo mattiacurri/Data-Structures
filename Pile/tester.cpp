@@ -6,11 +6,10 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     // Stack_vt<char> z;
     // Stack_vt<char> x;
-    
+
     //bool e = z.empty();
     //cout << boolalpha << e;
     //cout << endl;

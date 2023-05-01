@@ -330,8 +330,7 @@ void LinkedList<T>::tailErase() {
             p = nullptr;
             delete p;
             length--;
-        }
-        else {
+        } else {
             cout << "p->value: " << p->value << endl;
             p->previous->next = head;
             p = nullptr;

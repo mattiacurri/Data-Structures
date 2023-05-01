@@ -234,18 +234,16 @@ int util_n_tree::even_father_e(Tree_ptr<int> &t) {
 void util_n_tree::even_father_e(Tree_ptr<int> &T, typename Tree_ptr<int>::node n, int &counter) {
     Tree_ptr<int>::node c;
     //SE IL NODO E' PARI INCREMENTO IL COUNTER
-    if (n!=T.root())
-    {
-        if ((T.read(T.parent(n))%2)==0) counter++;
+    if (n != T.root()) {
+        if ((T.read(T.parent(n)) % 2) == 0) counter++;
     }
     if (!T.isLeaf(n)) {
         c = T.firstChild(n);
-        while (!T.isLastSibling(c))
-        {
-            even_father_e(T,c,counter);
-            c=T.nextSibling(c);
+        while (!T.isLastSibling(c)) {
+            even_father_e(T, c, counter);
+            c = T.nextSibling(c);
         }
-        even_father_e(T,c,counter);
+        even_father_e(T, c, counter);
     }
 }
 

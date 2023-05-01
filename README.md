@@ -1,4 +1,5 @@
 # Data Structures
+
 Implementazione di Strutture Dati per il corso di Algoritmi e Strutture Dati, Uniba.
 
 ## Strutture implementate ##

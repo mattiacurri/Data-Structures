@@ -207,7 +207,6 @@ void Tree_ptr<T>::invisita(node n) const {
 }
 
 
-
 template<class T>
 bool Tree_ptr<T>::isLastSibling(node n) const {
     return (n->brother == nullptr);

@@ -239,8 +239,8 @@ void VectorList<T>::insert(const value_type &v, position p) {
     }
 }
 
-template <class T>
-void VectorList<T>::tailInsert(const VectorList::value_type & e) {
+template<class T>
+void VectorList<T>::tailInsert(const VectorList::value_type &e) {
     position p = length + 1;
     insert(e, p);
 }

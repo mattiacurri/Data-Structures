@@ -25,55 +25,72 @@ class LinkedList;
 template<class T>
 class ListNode {
     friend class LinkedList<T>;
-    private:
+
+private:
     T value;
     ListNode<T> *previous;
     ListNode<T> *next;
 };
 
 template<class T>
-class LinkedList : public LinearList<T, ListNode <T>*> {
-    public:
-        typedef typename LinearList<T, ListNode<T>*>::value_type value_type;
-        typedef typename LinearList<T, ListNode<T>*>::position position;
+class LinkedList : public LinearList<T, ListNode<T> *> {
+public:
+    typedef typename LinearList<T, ListNode<T> *>::value_type value_type;
+    typedef typename LinearList<T, ListNode<T> *>::position position;
 
-        // costruttori
-        LinkedList();
-        // costruttore per copia
-        //LinkedList(const LinkedList<T>&); // TODO
-        //distruttore
-        ~LinkedList();
-        
-        // operatori
-        bool empty() const;
-        value_type read(position) const;
-        void write(const value_type &, position);
-        position begin() const;
-        bool end(position) const;
-        position next(position) const;
-        position previous(position) const;
-        void insert(const value_type &, position &);
-        void erase(position);
+    // costruttori
+    LinkedList();
 
-        int size() const {
-            return length;
-        };
+    // costruttore per copia
+    //LinkedList(const LinkedList<T>&);
+    //distruttore
+    ~LinkedList();
 
-        // sovraccarico di operatori
-        LinkedList<T>& operator=(const LinkedList<T>&); // the assignment operator
-        bool operator==(const LinkedList<T> &) const; // tests two list for equality
+    // operatori
+    bool empty() const;
 
-        // funzioni accessorie
-        void headInsert(const value_type&);
-        void tailInsert(const value_type&);
-        void headErase();
-        void tailErase();
-        position last() const;
-        int getLength() const;
-        void swap(position, position);
-    private:
-	    ListNode<T> *head;
-        int length; 
+    value_type read(position) const;
+
+    void write(const value_type &, position);
+
+    position begin() const;
+
+    bool end(position) const;
+
+    position next(position) const;
+
+    position previous(position) const;
+
+    void insert(const value_type &, position &);
+
+    void erase(position);
+
+    int size() const {
+        return length;
+    };
+
+    // sovraccarico di operatori
+    LinkedList<T> &operator=(const LinkedList<T> &); // the assignment operator
+    bool operator==(const LinkedList<T> &) const; // tests two list for equality
+
+    // funzioni accessorie
+    void headInsert(const value_type &);
+
+    void tailInsert(const value_type &);
+
+    void headErase();
+
+    void tailErase();
+
+    position last() const;
+
+    int getLength() const;
+
+    void swap(position, position);
+
+private:
+    ListNode<T> *head;
+    int length;
 };
 
 
@@ -95,17 +112,17 @@ LinkedList<T>::~LinkedList() {
 
 template<class T>
 bool LinkedList<T>::empty() const {
-    return(head == head->next);
+    return (head == head->next);
 }
 
 template<class T>
-typename LinkedList< T >::position
+typename LinkedList<T>::position
 LinkedList<T>::begin() const {
     return head->next;
 }
 
 template<class T>
-typename LinkedList< T >::position
+typename LinkedList<T>::position
 LinkedList<T>::last() const {
     return head->previous;
 }
@@ -116,20 +133,20 @@ bool LinkedList<T>::end(position p) const {
 }
 
 template<class T>
-typename LinkedList< T >::position
+typename LinkedList<T>::position
 LinkedList<T>::next(position p) const {
     return p->next;
 }
 
 template<class T>
-typename LinkedList< T >::position
+typename LinkedList<T>::position
 LinkedList<T>::previous(position p) const {
     return p->previous;
 }
 
-template< class T >
-void LinkedList< T >::write(const value_type &a, position p) {
-	if (!end(p)) {
+template<class T>
+void LinkedList<T>::write(const value_type &a, position p) {
+    if (!end(p)) {
         p->value = a;
     } else throw std::out_of_range("POSIZIONE NON VALIDA");
 }
@@ -143,44 +160,42 @@ template<class T>
 void LinkedList<T>::insert(const value_type &v, position &p) {
     position t = new ListNode<T>;
     t->value = v;
-    
+
     t->previous = p->previous;
     t->next = p;
-    p->previous->next = t; 
-    p->previous = t; 
+    p->previous->next = t;
+    p->previous = t;
     length++;
     p = p->previous;
 }
 
-template< class T >
-void LinkedList< T >::erase(position p){
-	if (!empty() && !end(p)) {
+template<class T>
+void LinkedList<T>::erase(position p) {
+    if (!empty() && !end(p)) {
         position tmp = p->next;
         p->previous->next = p->next;
         p->next->previous = p->previous;
         delete p;
         p = tmp;
         length--;
-    }
+    } else throw std::out_of_range("POSIZIONE NON VALIDA");
+}
+
+template<class T>
+typename LinkedList<T>::value_type
+LinkedList<T>::read(position p) const {
+    if (!end(p))
+        return (p->value);
     else throw std::out_of_range("POSIZIONE NON VALIDA");
 }
 
-template< class T >
-typename LinkedList< T >::value_type
-LinkedList< T >::read(position p) const {
-	if (!end(p))
-		return(p->value);
-    else throw std::out_of_range("POSIZIONE NON VALIDA");
-}
-
-template <class T>
-LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &L)
-{
+template<class T>
+LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &L) {
     if (this != &L) // per evitare l'autoassegnamento
     {
         // deallocare tutta la lista this
         this->~LinkedList();
-        
+
         length = 0;
 
         // creazione della sentinella per this
@@ -188,11 +203,9 @@ LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &L)
         head->next = head;
         head->previous = head;
 
-        if (!L.empty())
-        {
+        if (!L.empty()) {
             position p = L.last();
-            for (int i = 0; i < L.size(); i++)
-            {
+            for (int i = 0; i < L.size(); i++) {
                 position x = begin();
                 insert(L.read(p), x);
                 p = L.previous(p);
@@ -202,16 +215,14 @@ LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &L)
     return *this;
 }
 
-template <class T>
-bool LinkedList<T>::operator==(const LinkedList<T> &L) const
-{
+template<class T>
+bool LinkedList<T>::operator==(const LinkedList<T> &L) const {
     if (L.size() != length)
         return false;
     position p, pL;
     p = begin();
     pL = L.begin();
-    while (!end(p))
-    {
+    while (!end(p)) {
         if (p->value != pL->value)
             return false;
         p = p->next;
@@ -221,35 +232,34 @@ bool LinkedList<T>::operator==(const LinkedList<T> &L) const
 }
 
 template<class T>
-void LinkedList<T>::tailInsert(const value_type& e) {
+void LinkedList<T>::tailInsert(const value_type &e) {
     position p = new ListNode<T>;
     p->valore = e;
-    position pu=last();
-    p->prev=pu;
-    p->next=head;
-    pu->next=p;
-    head->prev=p;
+    position pu = last();
+    p->prev = pu;
+    p->next = head;
+    pu->next = p;
+    head->prev = p;
     length++;
 }
 
 
-
-template <class T>
+template<class T>
 void LinkedList<T>::headErase() {
-    position p=new ListNode<T>;
-    p=head->next;
-    head->next=head->next->next;
-    p= nullptr;
+    position p = new ListNode<T>;
+    p = head->next;
+    head->next = head->next->next;
+    p = nullptr;
     delete p;
     length--;
 }
-template <class T>
-void LinkedList<T>::tailErase()
-{
-    position p=new ListNode<T>;
-    p=last();
-    p->prev->next=head;
-    p=nullptr;
+
+template<class T>
+void LinkedList<T>::tailErase() {
+    position p = new ListNode<T>;
+    p = last();
+    p->prev->next = head;
+    p = nullptr;
     delete p;
     length--;
 }
@@ -259,13 +269,12 @@ int LinkedList<T>::getLength() const {
     return length;
 };
 
-template <class T>
+template<class T>
 void LinkedList<T>::swap(position p1, position p2) {
 
-    if( p1 != p2 && (p1 != nullptr && p2 != nullptr))
-    {
-        value_type temp=read(p1);
-        write(read(p2),p1);
+    if (p1 != p2 && (p1 != nullptr && p2 != nullptr)) {
+        value_type temp = read(p1);
+        write(read(p2), p1);
         write(temp, p2);
     }
 }
